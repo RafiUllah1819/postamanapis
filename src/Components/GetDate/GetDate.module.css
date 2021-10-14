@@ -1,0 +1,20 @@
+.Fields{
+    width: 40%;
+    margin-left: auto;
+    margin-bottom: 20px;
+    background: cadetblue;
+    padding: 18px;
+    border-radius: 10px;
+}
+.btn{
+    width: 114px;
+    color: white;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    margin-left: 76px;
+    
+}
+/* .formData{
+    display: flex;
+} */

@@ -1,0 +1,16 @@
+.userbtn{
+    width: 155px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    margin-left: 0;
+}
+.userbtn a{
+    width: 200px;
+    height: 40px;
+    padding-top: 7px;
+}
+.fields{
+    margin-top: 30px;
+    width: 30%;
+}
