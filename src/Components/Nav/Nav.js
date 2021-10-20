@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import {logout} from '../../Redux/Action/auth';
-import styles from './Nav.module.css'
+
 
 const Nav = () => {
     const dispatch = useDispatch();

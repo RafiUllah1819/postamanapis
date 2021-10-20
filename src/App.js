@@ -21,7 +21,7 @@ import Nav from './Components/Nav/Nav'
   const dispatch = useDispatch();
   const token = useSelector((state)=>state.AuthReducer.token?true:false)
   const role = useSelector((state)=>state.AuthReducer.role)
-  const { initAuth,logout } = Actions
+  const { initAuth } = Actions
   useEffect(()=>{
     dispatch(initAuth())
   },[]);
