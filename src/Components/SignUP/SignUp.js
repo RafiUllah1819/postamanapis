@@ -3,7 +3,7 @@ import styles from './SignUp.module.css';
 import { signUpFetch } from '../../Redux/Action/auth';
 import {  useDispatch } from 'react-redux';
 import { Link,useHistory } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
     const history = useHistory()
@@ -21,11 +21,20 @@ const SignUp = () => {
         const [auth, setAuth] = useState(false)
 
         const handleSubmit = () =>{
-            if(state.firstName.length < 1 || state.lastName.length<1 || state.email.length<1 || state.password.length<1 || state.password_confirmation.length<1)
+            const {password,password_confirmation} = state;
+            if(state.firstName.length===0) error("FirstName is empty")
+            if(state.lastName.length===0) error("LastName is empty")
+            if(state.email.length===0) error("Email is empty")
+            if(state.password.length===0) error("Password is empty")
+            if(state.password_confirmation.length===0) error("confirm Password is empty")
+            if(password !== password_confirmation) error("password don't match")
+
+            else if(state.firstName.length < 1 && state.lastName.length<1 && state.email.length<1 && state.password.length<1 && state.password_confirmation.length<1)
             {setAuth(true)}
             else{
-                dispatch(signUpFetch(state,history))
+                dispatch(signUpFetch(state))
                 setState(obj);
+                success("User Sign Up successfully")
             }
         }
 
@@ -60,6 +69,31 @@ const SignUp = () => {
                 password_confirmation : e.target.value
             })
         }
+
+        const error = (msg) => {
+        toast.error(msg,{
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+        })
+      }
+      const success = (msg) => {
+        toast.success(msg,{
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+        })
+      }
+   
+
     return (
         <div className="container">
           <div>
@@ -74,7 +108,7 @@ const SignUp = () => {
                     
                   />
      
-                   {auth && state.firstName === '' ? <span style={{color:'red'}}>please enter firstName </span>: null}
+    
                   </div>
                 <div className="form-group mb-3">
                     <input type="text"
@@ -83,7 +117,7 @@ const SignUp = () => {
                     value ={state.lastName}
                     onChange = {handleChangeLast}
                   />
-                   {auth && state.lastName === '' ? <span style={{color:'red'}}>please enter lastName </span>: null}
+               
                   </div>
                 <div className="form-group mb-3">
                     <input type="text"
@@ -92,7 +126,7 @@ const SignUp = () => {
                     value = {state.email}
                     onChange = {handleChangeEmail}
                   />
-                   {auth && state.email === '' ? <span style={{color:'red'}}>please enter email </span>: null}
+                  
                   </div>
                 <div className="form-group mb-3">
                     <input type="password"
@@ -101,7 +135,7 @@ const SignUp = () => {
                     value = {state.password}
                     onChange = {handleChangePassword }
                   />
-                  {auth && state.password === '' ? <span style={{color:'red'}}>please enter password </span>: null}
+                 
                   </div>
                 <div className="form-group mb-3">
                     <input type="password"
@@ -110,7 +144,7 @@ const SignUp = () => {
                     value = {state.password_confirmation}
                     onChange = {handleChangeCpassword}
                   />
-                   {auth && state.password_confirmation === '' ? <span style={{color:'red'}}>please enter password </span>: null}
+                  
                   </div>
         
                     <div className="btns">

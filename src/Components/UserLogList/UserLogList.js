@@ -8,19 +8,19 @@ import GetDate from '../GetDate/GetDate';
 import {set_page } from '../../Redux/Action/data';
 import { deleteUserLog } from '../../Redux/Action/workLog';
 
-    const UserLogList = () => {
-        const history = useHistory()
+     const UserLogList = () => {
+     const history = useHistory()
      const dispatch = useDispatch()
      const workData = useSelector((state)=>state.WorkLogReducer.workLog)
      const token = useSelector((state)=>state.AuthReducer.token)     
      const role = useSelector((state)=>state.AuthReducer.role)
      const page = useSelector((state)=>state.WorkLogReducer.page)
      const totalPages = useSelector((state)=>state.WorkLogReducer.totalPages)
+
      console.log("page", page)
      console.log("Totalpages", totalPages)
      console.log("workdata", workData.length)
-    //  const [popup, setPopup] = useState(false)
-
+  
     const editRecord = (work) =>{
       dispatch(edit_work(work))
     }
@@ -32,7 +32,7 @@ import { deleteUserLog } from '../../Redux/Action/workLog';
         <div className="workloglist">
             <GetDate />
            <div className={styles.workLog}>
-           <table className="table table-striped  table-hover mb-0">
+           {/* <table className="table table-striped  table-hover mb-2">
                <thead>
                    <tr>
                        <th>Id</th>
@@ -48,24 +48,26 @@ import { deleteUserLog } from '../../Redux/Action/workLog';
                  {
                      workData?.map((work , i)=>{
                          return(
-                            <tr key={i} style={{backgroundColor:work.hours>5?'#FFCCCB':'#aedb9f'}}>
+                            <tr key={i} style={{backgroundColor:work.is_under_hours?'#FFCCCB':'#aedb9f'}}>
                                 <td>{work.id}</td>
                                 <td>{work?.log_date}</td>
                                 <td>{work.hours}</td>
                                 <td>{role}</td>
                                 <td>{work.description}</td>
           
-                                   <td><Link to='/editLog' className="btn btn-primary"
-                            onClick={()=> editRecord(work)}>
-                            Edit 
+                                   <td><Link to='/editLog'
+  
+                            onClick={()=>dispatch(edit_work(work))}
+                            >
+                            <i className="fa fa-edit" style={{color:"#000"}}></i>
                                 </Link></td>
                             
                                 <td>
-                                <button className="btn btn-danger" onClick={()=>{
+                                
+                                  <i onClick={()=>
                                     dispatch(deleteUserLog(token,work.id))
-                                }}>
-                                    Delete
-                                </button>
+                                } className="fa fa-trash" style={{color:"red",fontSize:'20px',cursor:"pointer"}}></i>
+                               
                             </td>
 
                             </tr>
@@ -75,22 +77,59 @@ import { deleteUserLog } from '../../Redux/Action/workLog';
                     }
                </tbody>
                     
-           </table>
+           </table> */}
+          <div className={styles.cardSection}>
+          {
+             workData?.map((work, i)=>{
+                return(
+                  <div className={`card ${styles.Card}`}  style={{backgroundColor:work.is_under_hours?'#FFCCCB':'#aedb9f'}}>
+              <div className="card-body">
+                  <ul className="d-flex">
+                    <li>Id:<span>{work.id}</span></li>
+                    <li>LogDate: <span>{work.log_date}</span></li>
+                    <li>Hours: <span>{work.hours}</span></li>
+                    <li>UserType: <span>{role}</span></li>
+                    <li>Description: <span>{work.description}</span></li>
+                    <li>
+                    <Link to='/editLog' 
+                      onClick={()=> editRecord(work)}>
+                     <i className="fa fa-edit" style={{color:"#000", marginRight:'30px'}}></i>
+                      </Link>
+
+                      <Link  onClick={()=>{
+                              dispatch(deleteUserLog(token,work.id))
+                          }}>
+                             <i className="fa fa-trash" style={{color:"red"}}></i>
+                          </Link>
+
+                    </li>
+                   
+                  </ul>
+              </div>
+           </div>
+                )
+             })
+           }
+          </div>
         <button className={styles.userbtn}>
         <Link to='/user-log'>Add New </Link>
     </button>
     {workData.length > 0 ?
     <nav aria-label="...">
-  <ul className="pagination mt-5">
-    <li className={`page-item ${page<=1?"disabled":''}`}>
-      <span className='page-link' style={{cursor:'pointer'}} onClick={()=>dispatch(set_page(page-1))}>Previous</span>
+  <ul className={`pagination ${styles.Paginations} mt-5`}>
+    <li className={`page-item ${styles.pageItem} ${page<=1?"disabled":''}`}>
+      <span className={`page-link ${styles.pageLink}`} style={{cursor:'pointer'}} onClick={()=>dispatch(set_page(page-1))}>
+      <i className="fa fa-long-arrow-left"></i> 
+      </span>
     </li>
-    {totalPages.map((p)=><li className={`page-item ${p===page?'active':''}`} aria-current="page">
-      <span className="page-link" style={{cursor:'pointer'}} onClick={()=>dispatch(set_page(p))}>{p}</span>
+    {totalPages.map((p)=><li className={`page-item ${styles.pageItem} ${p===page?'active':''}`} aria-current="page">
+      <span className={`page-link ${styles.pageLink}`} style={{cursor:'pointer'}} onClick={()=>dispatch(set_page(p))}>{p}</span>
     </li>
     )}
-    <li className={`page-item ${page===totalPages.length?"disabled":''}`}>
-      <span className={`page-link`} style={{cursor:'pointer'}} onClick={()=>dispatch(set_page(page+1))}>Next</span>
+    <li className={`page-item ${styles.pageItem} ${page===totalPages.length?"disabled":''}`}>
+      <span className={`page-link ${styles.pageLink}`} style={{cursor:'pointer'}} onClick={()=>dispatch(set_page(page+1))}>
+      <i className="fa fa-long-arrow-right"></i> 
+      </span>
     </li>
   </ul>
 </nav> 

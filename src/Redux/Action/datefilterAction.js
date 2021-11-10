@@ -1,4 +1,4 @@
-
+import { fetch_workLog } from "./workLog"
 export const getDate = (token) => (dispatch) =>{
 
     fetch('http://34.210.129.167/api/users', {
@@ -22,5 +22,34 @@ const get_date = (date) =>{
     return{
         type: "SETDATE",
         date
+    }
+}
+
+export const getHours = (preHours) => (dispatch) =>{
+    const id = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
+    fetch(`http://34.210.129.167/api/users/${id}/preferred-working-hours`, {
+        method: 'PATCH',
+        body:JSON.stringify(preHours),
+        headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        Authorization: `Bearer ${token}`
+    },
+    })
+    .then((json)=> json.json())
+    // .then((response)=> dispatch(get_user(response)))
+    .then((response)=> dispatch(fetch_workLog(token)))
+    .catch((err)=>console.log(err))
+
+
+}
+
+
+const userNEwId = () => {
+    const id = localStorage.getItem('userId');
+
+    return {
+        type : "UserNEwId",
+        id:id==='undefined'?undefined:id,
     }
 }

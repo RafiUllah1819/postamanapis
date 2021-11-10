@@ -1,10 +1,9 @@
 .Fields{
-    width: 40%;
-    margin-left: auto;
+    max-width: 340px;
+    width: 100%;
     margin-bottom: 20px;
     background: cadetblue;
     padding: 18px;
-    border-radius: 10px;
 }
 .btn{
     width: 114px;
@@ -15,6 +14,41 @@
     margin-left: 76px;
     
 }
-/* .formData{
-    display: flex;
-} */
+.preHours{
+    max-width: 340px;
+    width: 100%;
+    background: cadetblue;
+    padding: 10px 21px;
+    padding-top: 53px;
+    height: 253px;
+    margin-right: 15px;
+
+}
+h5{color: #fff;text-align: left;}
+.preHours button{display: flex; margin-top: 5px;}
+/* .searchSections{margin-left: 40px;} */
+ 
+@media(max-width:894px){
+    .container{padding: 0 15px;}
+    .Fields{
+        max-width: 393px;  
+    }
+   
+    .preHours{
+        max-width: 393px;
+     }
+}
+@media(max-width:688px){
+    .searchSections{flex-direction: column;justify-content: center;}
+    .Fields{
+        max-width: 594px;
+        margin:0 auto 20px; 
+        width: 90%;
+    }
+    .preHours{
+        max-width: 594px;
+        margin: 0 auto 20px;
+        width: 90%;
+        order: 2;
+     }
+}

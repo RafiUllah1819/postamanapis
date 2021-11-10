@@ -1,9 +1,7 @@
 .userbtn{
     width: 155px;
     height: 52px;
-    display: flex;
-    align-items: center;
-    margin-left: 0;
+    margin-left: 9px;  
 }
 .userbtn a{
     width: 200px;
@@ -13,4 +11,65 @@
 .fields{
     margin-top: 30px;
     width: 30%;
+}
+.cardSection{
+    display: flex;
+    justify-content:flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.Card{
+    width: 31%;
+    margin: 0 10px;
+    padding: 20px 10px;
+} 
+.Card ul{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+   
+}
+.Card ul li{
+    width: 44%;
+    list-style-type: none;
+    padding:24px 0;
+    border-bottom: 1px solid #0000ff;
+    font-size: 19px;
+    margin-right: 20px;
+    text-align: left;
+}
+.Card li span{
+    margin-left: 5px;
+    color: #808080;
+}
+.Card button{
+    margin-left: 5px;
+    width: 73px;
+    height: 37px;
+}
+.Paginations {justify-content: center;}
+.Paginations li {width: 40px;height: 40px;margin-right: 10px;}
+.Paginations li span{border-radius: 50%;}
+.Paginations .pageItem:first-child .pageLink{border-radius: 50%;}
+.Paginations .pageItem:last-child .pageLink{border-radius: 50%;}
+
+@media(max-width:1356px){
+    .Card{
+        width: 47%;
+        margin: 0 10px 15px;
+        padding: 20px 10px;
+
+    } 
+}
+@media(max-width:896px){
+   
+    .Card{width: 90%;margin: 0 auto 20px;}
+}
+@media(max-width:600px){
+    .Card ul{padding: 0;}
+    .Card ul li{font-size: 18px;width: 44%;}
+}
+@media(max-width:450px){
+
+    .Card ul li{font-size: 18px;width: 87%;margin: 0 auto;}
 }

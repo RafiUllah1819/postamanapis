@@ -10,9 +10,9 @@ const Nav = () => {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-sm navbar-light bg-light justify-content-end">
  
-  <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent ">
+  <div className="d-flex justify-content-end" id="navbarSupportedContent ">
   
     <form className="form-inline my-2 my-lg-0">
      

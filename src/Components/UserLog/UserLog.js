@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetch_workLog } from '../../Redux/Action/workLog';
 import { createWorkLog } from '../../Redux/Action/workLog';
 import { Link , useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 const UserLog = () => {
@@ -17,23 +18,32 @@ const UserLog = () => {
         description : ''
     }
     const [state, setState] = useState(obj)
-
     const [auth, setAuth] = useState(false)
 
-    // const handleSubmit = () =>{
-    //     dispatch(createWorkLog(state,token))
-    // }
 
     useEffect(() => {
         dispatch(fetch_workLog(token))
     }, [token]);
 
 
+    // const handleData = () =>{
+    //     if(state.logDate.length > 0 && state.hours.length > 0 && state.description.length>0){
+          
+    //     }else{
+
+    //     }
     const handleSubmit = () =>{
+    
         if(state.logDate.length < 1 || state.hours.length<1 || state.description.length<1)
-        {setAuth(true)}
+        {setAuth(true)
+         if(state.logDate.length===0)  error("LogDate is empty")
+         if(state.hours.length===0)  error("Hours is empty")
+         if(state.description.length===0)  error("Description is empty")
+        }
+        
         else{
             dispatch(createWorkLog(state,token))
+            success("workLog added successfully")
             setState(obj);
         }
     }
@@ -58,6 +68,28 @@ const UserLog = () => {
     const handleClick = () => {
         history.push("/UserLogList");
       }
+      const error = (msg) => {
+        toast.error(msg,{
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+        })
+      }
+      const success = (msg) => {
+        toast.success(msg,{
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+        })
+      }
    
     return (
         <div className="container">
@@ -72,7 +104,7 @@ const UserLog = () => {
                 placeholder="yyyy-mm-dd"
                 min="1997-01-01" max="2030-12-31"
               />  
-               {auth && state.logDate === '' ? <span style={{color:'red'}}>please enter lastName </span>: null}
+               {/* {auth && state.logDate === '' ? <span style={{color:'red'}}>please enter lastName </span>: null} */}
               </div>
            <div className="form-group mb-3">
                 <input type="number"
@@ -81,7 +113,7 @@ const UserLog = () => {
                 onChange={hangleChangehours}
                 value={state.hours}
               />
-               {auth && state.hours === '' ? <span style={{color:'red'}}>please enter lastName </span>: null}
+               {/* {auth && state.hours === '' ? <span style={{color:'red'}}>please enter lastName </span>: null} */}
               </div>
               <div class="form-group">
                 <textarea  className={`form-control ${styles.inputField}`} 
@@ -90,11 +122,11 @@ const UserLog = () => {
                  value={state.description}
                  onChange={hangleChangeDescription }
                  />
-                  {auth && state.description === '' ? <span style={{color:'red'}}>please enter lastName </span>: null}
+                  {/* {auth && state.description === '' ? <span style={{color:'red'}}>please enter lastName </span>: null} */}
             </div>
             <button className="btn btn-success d-flex align-items-center  mt-3"
              style={{width:'163px', height:'45px',}}
-            onClick={ ()=> { handleSubmit() ; handleClick()}
+            onClick={ ()=> handleSubmit()
             } > CreateWorkLog
            
             </button>

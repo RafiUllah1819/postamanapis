@@ -1,5 +1,6 @@
 .formWrap{
-    width: 40%;
+    max-width: 519px;
+    width: 100%;
     margin: 0 auto;
     padding: 85px 45px 100px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;

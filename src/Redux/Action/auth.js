@@ -15,8 +15,8 @@ export const signInFetch = (state) => (dispatch) =>{
     })
     .catch((err)=> console.log(err))
 }
-export const signUpFetch = (state,history) => (dispatch) =>{
-   fetch('http://34.210.129.167/api/register', {
+    export const signUpFetch = (state,history) => (dispatch) =>{
+        fetch('http://34.210.129.167/api/register', {
        method: 'POST',
        body: JSON.stringify(state),
        headers: {
@@ -37,7 +37,7 @@ const setAuth = (token,role,id) => {
         id
     }
 }
-const initAuth = () => {
+    const initAuth = () => {
     const token = localStorage.getItem('token');
     const role = localStorage.getItem('role');
     const id = localStorage.getItem('userId');

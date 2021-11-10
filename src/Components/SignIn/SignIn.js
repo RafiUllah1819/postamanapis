@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import styles from './SignIn.module.css';
 import { signInFetch } from '../../Redux/Action/auth';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+
 const SignIn = () => {
     const dispatch = useDispatch()
 
@@ -14,10 +16,13 @@ const SignIn = () => {
     const [auth, setAuth] = useState(false)
        
     const handleSubmit = () =>{
-        if( state.email.length<1 || state.password.length<1)
+        if(state.email.length===0) error("Email is empty")
+        if(state.password.length===0) error("password is empty")
+        if( state.email.length<3 && state.password.length<3)
         {setAuth(true)}
         else{
             dispatch(signInFetch(state))
+            // success("User login successfully")
             setState(obj);
         }
     }
@@ -34,6 +39,30 @@ const SignIn = () => {
             password: e.target.value
         })
     }
+
+    const error = (msg) => {
+        toast.error(msg,{
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+        })
+      }
+      const success = (msg) => {
+        toast.success(msg,{
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+        })
+      }
+   
 
     return (
         <div className="container">

@@ -31,13 +31,10 @@ import Nav from './Components/Nav/Nav'
     console.log("role", role)
     if(role==='user') routes = (
     <>
-    {/* <button className='btn btn-info' 
-    style={{display:"flex",width: '191px',height:'42px',justifyContent:'center',marginLeft:'auto',marginRight:'25px'}}
-    onClick={()=>dispatch(logout())}>Logout</button> */}
     <Nav />
+    <Route path="/editLog" component={EditUserLog}/>
     <Route path="/user-log" component={UserLog}/>
     <Route path="/UserLogList" component={ UserLogList}/>
-    <Route path="/editLog" component={EditUserLog}/>
     <Route path="getdate" component={GetDate}/>
     <Redirect from='/' to='/user-log'/>
     </>

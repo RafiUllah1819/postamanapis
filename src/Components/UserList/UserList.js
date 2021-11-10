@@ -18,7 +18,7 @@ const UserList = () => {
        
             <div className={styles.tableData}>
             <h3>Dashboard</h3>
-            <table className="table table-striped  table-hover">
+            {/* <table className="table table-striped  table-hover">
                <thead>
                    <tr>
                        <th>Id</th>
@@ -40,16 +40,16 @@ const UserList = () => {
                             <td>{list.lastName}</td>
                             <td>{list.email}</td>
                             <td>{role}</td>
-                            <td><Link to='/edit' className="btn btn-primary"
+                            <td><Link to='/edit'
                             onClick={()=>dispatch(edit_User(list))}>
-                            Edit 
+                             <i className="fa fa-edit" style={{color:"#000"}}></i>
                                 </Link></td>
                             <td>
-                                <button className="btn btn-danger" onClick={()=>{
+                               
+                                   <i onClick={()=>
                                     dispatch(deleteUser(token,list.id))
-                                }}>
-                                    Delete
-                                </button>
+                                } className="fa fa-trash" style={{color:"red",fontSize:'20px',cursor:"pointer"}}></i>
+                              
                             </td>
                         </tr>
                          )
@@ -57,22 +57,61 @@ const UserList = () => {
                        })
                    }
                </tbody>
-           </table>
+           </table> */}
+                   <div className={styles.userList}>
+                   {
+             users?.map((list, i)=>{
+                return(
+                  <div className={`card ${styles.Card}`}>
+              <div className="card-body">
+                  <ul className="d-flex">
+                    <li>Id:<span>{list.id}</span></li>
+                    <li>FirstName: <span>{list.firstName}</span></li>
+                    <li>LastName: <span>{list.lastName}</span></li>
+                    <li>Email: <span>{list.email}</span></li>
+                    <li>Role: <span>{role}</span></li>
+    
+                    <li>
+                    <Link to='/edit' className="btn btn-primary"
+                    onClick={()=>dispatch(edit_User(list))}>
+                    Edit 
+                    </Link>
+                    <button className="btn btn-danger" onClick={()=>{
+                        dispatch(deleteUser(token,list.id))
+                    }}>
+                        Delete
+                    </button>
+            
+
+                    </li>
+                   
+                  </ul>
+              </div>
+           </div>
+                )
+             })
+           }
+                   </div>
+           
                  <div className={styles.creatbtn}>
                  <Link to="/home">create new</Link>
                  </div>
            <div>
            <nav aria-label="...">
-  <ul className="pagination">
-    <li className={`page-item ${page<=1?"disabled":''}`}>
-      <span className='page-link' style={{cursor:'pointer'}} onClick={()=>dispatch(set_page(page-1))}>Previous</span>
+  <ul className={`pagination ${styles.Paginations}`}>
+    <li className={`page-item ${styles.pageItem} ${page<=1?"disabled":''}`}>
+      <span className={`page-link ${styles.pageLink}`} style={{cursor:'pointer'}} onClick={()=>dispatch(set_page(page-1))}>
+      <i className="fa fa-long-arrow-left"></i> 
+      </span>
     </li>
     {totalPages.map((p)=><li className={`page-item ${p===page?'active':''}`} aria-current="page">
       <span className="page-link" style={{cursor:'pointer'}} onClick={()=>dispatch(set_page(p))}>{p}</span>
     </li>
     )}
-    <li className={`page-item ${page===totalPages.length?"disabled":''}`}>
-      <span className={`page-link`} style={{cursor:'pointer'}} onClick={()=>dispatch(set_page(page+1))}>Next</span>
+    <li className={`page-item ${styles.pageItem} ${page===totalPages.length?"disabled":''}`}>
+      <span className={`page-link ${styles.pageLink}`} style={{cursor:'pointer'}} onClick={()=>dispatch(set_page(page+1))}>
+      <i className="fa fa-long-arrow-right"></i> 
+      </span>
     </li>
   </ul>
 </nav>

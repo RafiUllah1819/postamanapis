@@ -1,4 +1,4 @@
-
+import { fetch_workLog } from './workLog'
 export const getEditLog = (token,push, state) => (dispatch) =>{
 
     fetch(`http://34.210.129.167/api/work-logs/${state.id}`, {
@@ -11,7 +11,10 @@ export const getEditLog = (token,push, state) => (dispatch) =>{
     },
     })
     .then((json)=> json.json())
-    .then((response)=> push('/UserLogList'))
+    .then((response)=> {
+        dispatch(fetch_workLog(token))
+        push('/UserLogList')
+    })
     .catch((err)=>dispatch(edit_WorkErr(err)))
 
 }

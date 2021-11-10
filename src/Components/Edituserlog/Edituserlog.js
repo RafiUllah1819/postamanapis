@@ -17,7 +17,7 @@ const EditUserLog = () => {
 
     useEffect(() => {
        setId(editwork?.id);
-       setLogDate(editwork?.logDate);
+       setLogDate(editwork?.log_date);
        setHours(editwork?.hours);
        setDescription(editwork?.description)
     }, [editwork]);
@@ -33,6 +33,7 @@ const EditUserLog = () => {
                 onChange={(e) =>setLogDate(e.target.value) }
                 value={logDate} 
                 name="begin"
+                format="yyyy-mm-dd"
                 placeholder="yyyy-mm-dd"
                 min="1997-01-01" max="2030-12-31"
               />  
@@ -55,8 +56,12 @@ const EditUserLog = () => {
             </div>
     
             <button className="btn btn-info d-flex mt-3"
-            onClick={()=>dispatch(getEditLog(token,history.push,{id, logDate,hours, description})),
+            onClick={()=>{
+                const date = logDate.split('/');
+                const formatDate = `${date[0]}`
+                dispatch(getEditLog(token,history.push,{id, logDate:formatDate,hours, description}));
                 history.push('/UserLogList')}
+            }
             >
                    Update
             </button>

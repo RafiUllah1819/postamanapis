@@ -3,7 +3,7 @@ import styles from './User.module.css';
 import { useDispatch,useSelector } from 'react-redux';
 import { createUser } from '../../Redux/Action/UserAction';
 import { Link, useHistory } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 
 const User = () => {
     
@@ -11,6 +11,7 @@ const User = () => {
     const history = useHistory()
     const token = useSelector((state)=>state.AuthReducer.token)
     const role = useSelector((state)=>state.AuthReducer.role)
+
     const obj = {
     firstName : '',
     lastName : '',
@@ -21,9 +22,26 @@ const User = () => {
  }
 
     const [state, setState] = useState(obj)
+    const [auth, setAuth] = useState(false)
+
     const handleSubmit = () =>{
-        dispatch(createUser(state,token))
-        history.push('/users')
+        const {password, password_confirmation} = state;
+        if(password !== password_confirmation) error("Password don't match")
+        else if(state.firstName.length<1 && state.lastName.length<1 && state.email.length<1 && state.password.length<1 && state.password_confirmation.length<1 && password !== password_confirmation)
+         {
+            if(state.firstName.length===0) error("Firstname is empty")
+            if(state.lastName.length===0) error("LastName is empty")
+            if(state.email.length===0) error("Email is empty")
+            if(state.password.length===0) error("Password is empty")
+            if(state.password_confirmation.length===0) error("confirm password is empty")
+            setAuth(true)
+        }
+        else{
+            dispatch(createUser(state,token))
+            success("Record added successfully")
+            setState(obj)
+        }
+        // history.push('/users')
     }
 
   const handleChangeFirst = (e) =>{
@@ -64,6 +82,30 @@ const User = () => {
             userType : e.target.value
         })
     }
+
+    const error = (msg) => {
+        toast.error(msg,{
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+        })
+      }
+      const success = (msg) => {
+        toast.success(msg,{
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+        })
+      }
+
     return (
       <div className="container">
       <div>
@@ -76,7 +118,7 @@ const User = () => {
                 value ={state.firstName}
                 onChange = {handleChangeFirst}
               />
-               {/* {auth && state.firstName == '' ? <span>please enter firstName </span>: null} */}
+              
               </div>
             <div className="form-group mb-3">
                 <input type="text"
@@ -85,7 +127,7 @@ const User = () => {
                 value ={state.lastName}
                 onChange = {handleChangeLast}
               />
-               {/* {auth && state.lastName == '' ? <span>please enter lastName </span>: null} */}
+              
               </div>
             <div className="form-group mb-3">
                 <input type="text"
@@ -94,7 +136,7 @@ const User = () => {
                 value = {state.email}
                 onChange = {handleChangeEmail}
               />
-               {/* {auth && state.email == '' ? <span>please enter email </span>: null} */}
+              
               </div>
             <div className="form-group mb-3">
                 <input type="password"
@@ -103,7 +145,7 @@ const User = () => {
                 value = {state.password}
                 onChange = {handleChangePassword }
               />
-              {/* {auth && state.password == '' ? <span>please enter password </span>: null} */}
+             
               </div>
             <div className="form-group mb-3">
                 <input type="password"
@@ -112,7 +154,7 @@ const User = () => {
                 value = {state.password_confirmation}
                 onChange = {handleChangeCpassword}
               />
-              {/* {auth && state.password == '' ? <span>please enter password </span>: null} */}
+             
               </div>
             <div className="form-group mb-3">
             <div className="form-group">
@@ -124,9 +166,8 @@ const User = () => {
                 }
                 <option>user</option>
                 </select>
-            </div>
-              
-               {/* {auth && state.userType == '' ? <span>please enter UserType</span>: null} */}
+            </div>   
+             
               </div>
                 <div className="btns d-flex flex-wrap">
                
