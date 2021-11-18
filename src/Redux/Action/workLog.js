@@ -1,5 +1,5 @@
 export const createWorkLog = (state,token) => (dispatch) =>{
-    console.log("action token", token, JSON.stringify(state))
+    // console.log("action token", token, JSON.stringify(state))
    fetch('http://34.210.129.167/api/work-logs', {
        method: 'POST',
        body: JSON.stringify(state),
@@ -13,9 +13,9 @@ export const createWorkLog = (state,token) => (dispatch) =>{
    .catch((err)=>console.log(err))
 }
 export const fetch_workLog = (token,page) => (dispatch) =>{
-    console.log("token worklog",token);
-    console.log("token worklog",page);
-    console.log("inside Fetch");
+    // console.log("token worklog",token);
+    // console.log("token worklog",page);
+    // console.log("inside Fetch");
    fetch(`http://34.210.129.167/api/work-logs?page=${page}`, {
        method: 'GET',
        headers: {
@@ -25,13 +25,13 @@ export const fetch_workLog = (token,page) => (dispatch) =>{
    })
    .then((json)=> json.json())
    .then((response) => dispatch(set_workLog(response.workLogs)))
-   .then((response) => console.log("check get worklog last_page",response))
+//    .then((response) => console.log("check get worklog last_page",response))
    .catch((err)=>console.log(err))
 }
 export const filterWorkLog = (from,to) => (dispatch) =>{
     const token = localStorage.getItem('token')
-    console.log("token worklog",token);
-    console.log("inside Fetch");
+    // console.log("token worklog",token);
+    // console.log("inside Fetch");
    fetch(`http://34.210.129.167/api/work-logs/${from}/${to}`, {
        method: 'GET',
        headers: {
@@ -41,7 +41,7 @@ export const filterWorkLog = (from,to) => (dispatch) =>{
    })
    .then((json)=> json.json())
    .then((response) => dispatch(set_workLog(response.workLogs)))
-   .then((response) => console.log("check get worklogresponse" , response))
+//    .then((response) => console.log("check get worklogresponse" , response))
    .catch((err)=>console.log(err))
 }
 export const deleteUserLog = (token,id) => (dispatch) =>{
@@ -60,7 +60,7 @@ export const deleteUserLog = (token,id) => (dispatch) =>{
 }
 
 export const set_workLog = (data) =>{
-    console.log("data of set worklog",data.last_page);
+    // console.log("data of set worklog",data.last_page);
     return {
         type : "SET_WORKLOG",
         workLog: data.data,

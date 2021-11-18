@@ -3,12 +3,11 @@ import styles from './UserLog.module.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { fetch_workLog } from '../../Redux/Action/workLog';
 import { createWorkLog } from '../../Redux/Action/workLog';
-import { Link , useHistory } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
 const UserLog = () => {
-    const history = useHistory()
     const dispatch = useDispatch();
     const token = useSelector((state)=>state.AuthReducer.token)
 
@@ -18,11 +17,13 @@ const UserLog = () => {
         description : ''
     }
     const [state, setState] = useState(obj)
+    // eslint-disable-next-line
     const [auth, setAuth] = useState(false)
 
 
     useEffect(() => {
         dispatch(fetch_workLog(token))
+        // eslint-disable-next-line
     }, [token]);
 
 
@@ -65,9 +66,7 @@ const UserLog = () => {
             description : e.target.value
         })
     }
-    const handleClick = () => {
-        history.push("/UserLogList");
-      }
+  
       const error = (msg) => {
         toast.error(msg,{
          position: "top-right",
@@ -115,7 +114,7 @@ const UserLog = () => {
               />
                {/* {auth && state.hours === '' ? <span style={{color:'red'}}>please enter lastName </span>: null} */}
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <textarea  className={`form-control ${styles.inputField}`} 
                 placeholder="Description"
                  id="exampleFormControlTextarea1" rows="4" 

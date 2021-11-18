@@ -18,13 +18,6 @@ export const getDate = (token) => (dispatch) =>{
 }
 
 
-const get_date = (date) =>{
-    return{
-        type: "SETDATE",
-        date
-    }
-}
-
 export const getHours = (preHours) => (dispatch) =>{
     const id = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
@@ -45,11 +38,3 @@ export const getHours = (preHours) => (dispatch) =>{
 }
 
 
-const userNEwId = () => {
-    const id = localStorage.getItem('userId');
-
-    return {
-        type : "UserNEwId",
-        id:id==='undefined'?undefined:id,
-    }
-}

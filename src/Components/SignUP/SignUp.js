@@ -1,25 +1,24 @@
-import React ,{useState, useEffect} from 'react'
+import React ,{useState} from 'react'
 import styles from './SignUp.module.css';
 import { signUpFetch } from '../../Redux/Action/auth';
 import {  useDispatch } from 'react-redux';
-import { Link,useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const SignUp = () => {
-    const history = useHistory()
     const  dispatch = useDispatch()
         const obj = {
             firstName : '',
             lastName : '',
             email : '',
             password : '',
-            password_confirmation : '',
-          
+            password_confirmation : '', 
          }
 
         const [state, setState] = useState(obj)
+        // eslint-disable-next-line
         const [auth, setAuth] = useState(false)
-
+        
         const handleSubmit = () =>{
             const {password,password_confirmation} = state;
             if(state.firstName.length===0) error("FirstName is empty")

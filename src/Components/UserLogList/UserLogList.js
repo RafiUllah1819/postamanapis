@@ -2,14 +2,14 @@ import React , {useEffect } from 'react';
 import { useDispatch , useSelector } from 'react-redux';
 import { fetch_workLog } from '../../Redux/Action/workLog';
 import { edit_work } from '../../Redux/Action/EditworkAction';
-import { Link ,useHistory } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import styles from './UserLogList.module.css'
 import GetDate from '../GetDate/GetDate';
 import {set_page } from '../../Redux/Action/data';
 import { deleteUserLog } from '../../Redux/Action/workLog';
 
      const UserLogList = () => {
-     const history = useHistory()
+
      const dispatch = useDispatch()
      const workData = useSelector((state)=>state.WorkLogReducer.workLog)
      const token = useSelector((state)=>state.AuthReducer.token)     
@@ -17,15 +17,16 @@ import { deleteUserLog } from '../../Redux/Action/workLog';
      const page = useSelector((state)=>state.WorkLogReducer.page)
      const totalPages = useSelector((state)=>state.WorkLogReducer.totalPages)
 
-     console.log("page", page)
-     console.log("Totalpages", totalPages)
-     console.log("workdata", workData.length)
+    //  console.log("page", page)
+    //  console.log("Totalpages", totalPages)
+    //  console.log("workdata", workData.length)
   
     const editRecord = (work) =>{
       dispatch(edit_work(work))
     }
      useEffect(() => {
       dispatch(fetch_workLog)
+      // eslint-disable-next-line
      }, [token,page])
 
     return (

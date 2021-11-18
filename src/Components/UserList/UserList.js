@@ -13,58 +13,20 @@ const UserList = () => {
     const role = useSelector((state)=>state.AuthReducer.role)
     useEffect(()=> {
         dispatch(getAllData(token,page));
+        // eslint-disable-next-line
     },[token,page])
     return (
        
             <div className={styles.tableData}>
             <h3>Dashboard</h3>
-            {/* <table className="table table-striped  table-hover">
-               <thead>
-                   <tr>
-                       <th>Id</th>
-                       <th>FirstName</th>
-                       <th>LastName</th>
-                       <th>Email</th>
-                       <th>Role</th>
-                       <th>Edit</th>
-                       <th>Delete</th>
-                   </tr>
-               </thead>
-               <tbody>
-                   {
-                       users?.map((list, i)=>{
-                         return(
-                            <tr key={i}>
-                            <td>{list.id}</td>
-                            <td>{list.firstName}</td>
-                            <td>{list.lastName}</td>
-                            <td>{list.email}</td>
-                            <td>{role}</td>
-                            <td><Link to='/edit'
-                            onClick={()=>dispatch(edit_User(list))}>
-                             <i className="fa fa-edit" style={{color:"#000"}}></i>
-                                </Link></td>
-                            <td>
-                               
-                                   <i onClick={()=>
-                                    dispatch(deleteUser(token,list.id))
-                                } className="fa fa-trash" style={{color:"red",fontSize:'20px',cursor:"pointer"}}></i>
-                              
-                            </td>
-                        </tr>
-                         )
-                            
-                       })
-                   }
-               </tbody>
-           </table> */}
+
                    <div className={styles.userList}>
                    {
-             users?.map((list, i)=>{
+             users?.map((list ,i)=>{
                 return(
-                  <div className={`card ${styles.Card}`}>
+                  <div className={`card ${styles.Card}`} >
               <div className="card-body">
-                  <ul className="d-flex">
+                  <ul className="d-flex" key={list.id}>
                     <li>Id:<span>{list.id}</span></li>
                     <li>FirstName: <span>{list.firstName}</span></li>
                     <li>LastName: <span>{list.lastName}</span></li>

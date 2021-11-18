@@ -2,13 +2,12 @@ import React , {useState} from 'react';
 import styles from './User.module.css';
 import { useDispatch,useSelector } from 'react-redux';
 import { createUser } from '../../Redux/Action/UserAction';
-import { Link, useHistory } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const User = () => {
     
     const dispatch = useDispatch()
-    const history = useHistory()
     const token = useSelector((state)=>state.AuthReducer.token)
     const role = useSelector((state)=>state.AuthReducer.role)
 
@@ -22,6 +21,7 @@ const User = () => {
  }
 
     const [state, setState] = useState(obj)
+    // eslint-disable-next-line
     const [auth, setAuth] = useState(false)
 
     const handleSubmit = () =>{

@@ -62,10 +62,10 @@ export const logout = () => {
     }
 }
 
-export default {
+const logger = {
     signInFetch,
     signUpFetch,
     initAuth,
     logout
 }
-
+export default logger

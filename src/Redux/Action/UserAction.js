@@ -13,7 +13,7 @@ export const createUser = (state, token) => (dispatch) =>{
     })
     .then((json)=> json.json())
     // .then((response) => dispatch(setUser(response)))
-    .then((response) => console.log("response" , response))
+    // .then((response) => console.log("response" , response))
     .catch((err)=>dispatch(setUserErr(err)))
 }
 
@@ -29,8 +29,10 @@ const setUserErr = () => {
        
     }
 }
-export default {
+ 
+const user = {
     createUser,
     setUser, 
     setUserErr
 }
+export default user

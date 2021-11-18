@@ -18,8 +18,10 @@ const SignIn = () => {
     const handleSubmit = () =>{
         if(state.email.length===0) error("Email is empty")
         if(state.password.length===0) error("password is empty")
-        if( state.email.length<3 && state.password.length<3)
-        {setAuth(true)}
+        if( state.email.length<3 && state.password.length<3) 
+        {setAuth(true)
+            // error("Invalid Email or Password")
+        }
         else{
             dispatch(signInFetch(state))
             // success("User login successfully")
@@ -51,17 +53,7 @@ const SignIn = () => {
          progress: undefined,
         })
       }
-      const success = (msg) => {
-        toast.success(msg,{
-         position: "top-right",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-        })
-      }
+    
    
 
     return (

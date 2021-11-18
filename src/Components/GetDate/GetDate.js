@@ -4,15 +4,11 @@ import { filterWorkLog } from '../../Redux/Action/workLog';
 import { getHours } from '../../Redux/Action/datefilterAction';
 import { fetch_workLog } from '../../Redux/Action/workLog';
 import styles from './GetDate.module.css'
-import { useHistory } from 'react-router';
-
 
 const GetDate = () => {
-    // const id = useSelector((state)=>state.AuthReducer.id)
     const token = useSelector((state)=>state.AuthReducer.token)     
     const page = useSelector((state)=>state.WorkLogReducer.page)
-    const history = useHistory()
-   
+  
     const dis = useDispatch();
     const [from , setFrom] = useState('')
      const [to , setTo] = useState('')
@@ -21,6 +17,7 @@ const GetDate = () => {
 
      useEffect(() => {
         dis(fetch_workLog)
+        // eslint-disable-next-line
        }, [token,page])
        
     return (
