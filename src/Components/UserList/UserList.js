@@ -24,7 +24,7 @@ const UserList = () => {
                    {
              users?.map((list ,i)=>{
                 return(
-                  <div className={`card ${styles.Card}`} >
+                  <div key={i} className={`card ${styles.Card}`} >
               <div className="card-body">
                   <ul className="d-flex" key={list.id}>
                     <li>Id:<span>{list.id}</span></li>
@@ -66,7 +66,7 @@ const UserList = () => {
       <i className="fa fa-long-arrow-left"></i> 
       </span>
     </li>
-    {totalPages.map((p)=><li className={`page-item ${p===page?'active':''}`} aria-current="page">
+    {totalPages.map((p, i)=><li key={i} className={`page-item ${p===page?'active':''}`} aria-current="page">
       <span className="page-link" style={{cursor:'pointer'}} onClick={()=>dispatch(set_page(p))}>{p}</span>
     </li>
     )}

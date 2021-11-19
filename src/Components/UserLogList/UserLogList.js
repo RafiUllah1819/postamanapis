@@ -99,7 +99,7 @@ import { deleteUserLog } from '../../Redux/Action/workLog';
                       <span  onClick={()=>{
                               dispatch(deleteUserLog(token,work.id))
                           }}>
-                             <i className="fa fa-trash" style={{color:"red"}}></i>
+                             <i className="fa fa-trash" style={{color:"red", cursor:"pointer"}}></i>
                           </span>
 
                     </li>
