@@ -77,13 +77,12 @@ import { deleteUserLog } from '../../Redux/Action/workLog';
                         })
                     }
                </tbody>
-                    
-           </table> */}
+              </table> */}
           <div className={styles.cardSection}>
           {
              workData?.map((work, i)=>{
                 return(
-                  <div className={`card ${styles.Card}`}  style={{backgroundColor:work.is_under_hours?'#FFCCCB':'#aedb9f'}}>
+                  <div key={i} className={`card ${styles.Card}`}  style={{backgroundColor:work.is_under_hours?'#FFCCCB':'#aedb9f'}}>
               <div className="card-body">
                   <ul className="d-flex">
                     <li>Id:<span>{work.id}</span></li>
@@ -97,11 +96,11 @@ import { deleteUserLog } from '../../Redux/Action/workLog';
                      <i className="fa fa-edit" style={{color:"#000", marginRight:'30px'}}></i>
                       </Link>
 
-                      <Link  onClick={()=>{
+                      <span  onClick={()=>{
                               dispatch(deleteUserLog(token,work.id))
                           }}>
                              <i className="fa fa-trash" style={{color:"red"}}></i>
-                          </Link>
+                          </span>
 
                     </li>
                    
@@ -123,7 +122,7 @@ import { deleteUserLog } from '../../Redux/Action/workLog';
       <i className="fa fa-long-arrow-left"></i> 
       </span>
     </li>
-    {totalPages.map((p)=><li className={`page-item ${styles.pageItem} ${p===page?'active':''}`} aria-current="page">
+    {totalPages.map((p,i)=><li key={i} className={`page-item ${styles.pageItem} ${p===page?'active':''}`} aria-current="page">
       <span className={`page-link ${styles.pageLink}`} style={{cursor:'pointer'}} onClick={()=>dispatch(set_page(p))}>{p}</span>
     </li>
     )}
