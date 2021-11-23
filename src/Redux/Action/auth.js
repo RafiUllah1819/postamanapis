@@ -1,4 +1,29 @@
 import { url } from "./restapi";
+import { toast } from 'react-toastify';
+
+let code;
+const error = (msg) => {
+    toast.error(msg,{
+     position: "top-right",
+     autoClose: 5000,
+     hideProgressBar: false,
+     closeOnClick: true,
+     pauseOnHover: true,
+     draggable: true,
+     progress: undefined,
+    })
+  }
+  const success = (msg) => {
+    toast.success(msg,{
+     position: "top-right",
+     autoClose: 5000,
+     hideProgressBar: false,
+     closeOnClick: true,
+     pauseOnHover: true,
+     draggable: true,
+     progress: undefined,
+    })
+  }
 
 export const signInFetch = (state) => (dispatch) =>{
     
@@ -27,9 +52,18 @@ export const signInFetch = (state) => (dispatch) =>{
        'Content-type': 'application/json; charset=UTF-8',
         },
    })
-   .then((response) => response.json())
+   .then((json) =>{ 
+    code = json.status   
+    json.json()
+    }
+    )
    .then((json) => {
-       history.push('/SignIn')
+       if(code!==422 && code!==400){
+           success(" User created successfully")
+       }else{
+           error("Email is already taken")
+       }
+    //    history.push('/SignIn')
     })
    .catch((err)=> console.log(err))
 }

@@ -34,15 +34,16 @@ const UserList = () => {
                     <li>Role: <span>{role}</span></li>
     
                     <li>
-                    <Link to='/edit' className="btn btn-primary"
+                    <Link to='/edit' 
                     onClick={()=>dispatch(edit_User(list))}>
-                    Edit 
+                    <i className="fa fa-edit" style={{color:"#000", marginRight:'30px'}}></i>
                     </Link>
-                    <button className="btn btn-danger" onClick={()=>{
+                    <span  onClick={()=>{
+                       if (window.confirm('Are you sure to delete this item?'))
                         dispatch(deleteUser(token,list.id))
                     }}>
-                        Delete
-                    </button>
+                       <i className="fa fa-trash" style={{color:"red", cursor:"pointer"}}></i>
+                    </span>
             
 
                     </li>

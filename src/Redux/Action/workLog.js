@@ -40,11 +40,11 @@ export const createWorkLog = (state,token) => (dispatch) =>{
    } 
    )
    .then((response) =>{ 
-    if(code!==422){
+    if(code!==422 && code!==400){
         dispatch(fetch_workLog(token,1));
         success("workLog added successfully")
     }else{
-        error("worklog not added")
+        error("Error in workLog & not added")
     }
 })
    .catch((err)=>console.log(err))
@@ -77,7 +77,7 @@ export const filterWorkLog = (from,to) => (dispatch) =>{
    },
    })
    .then((json)=> json.json())
-   .then((response) => dispatch(set_workLog(response.workLogs)))
+   .then((response) => dispatch(set_workLog(response.workLogs,response.pages)))
 //    .then((response) => console.log("check get worklogresponse" , response))
    .catch((err)=>console.log(err))
 }

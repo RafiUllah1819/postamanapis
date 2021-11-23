@@ -53,7 +53,9 @@ import { deleteUserLog } from '../../Redux/Action/workLog';
                       </Link>
 
                       <span  onClick={()=>{
+                         if (window.confirm('Are you sure to delete this item?'))
                               dispatch(deleteUserLog(token,work.id))
+                             
                           }}>
                              <i className="fa fa-trash" style={{color:"red", cursor:"pointer"}}></i>
                           </span>

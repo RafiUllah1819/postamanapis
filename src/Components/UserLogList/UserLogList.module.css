@@ -75,7 +75,7 @@ height: 45px;
     .Card ul li{padding-left: 0;width: 48%; padding: 20px 0;font-size: 16px;margin-right: 4px;} 
 }
 @media(max-width:896px){
-   .userbtn{margin-left: 44px;}
+   .userbtn{margin-left:0; margin-left: 5%;}
     .Card{width: 90%;margin: 0 auto 20px;}
 }
 @media(max-width:600px){

@@ -33,7 +33,7 @@ const SignUp = () => {
             else{
                 dispatch(signUpFetch(state))
                 setState(obj);
-                success("User Sign Up successfully")
+                // success("User Sign Up successfully")
             }
         }
 
