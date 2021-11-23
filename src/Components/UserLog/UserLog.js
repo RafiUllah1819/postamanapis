@@ -44,7 +44,7 @@ const UserLog = () => {
         
         else{
             dispatch(createWorkLog(state,token))
-            success("workLog added successfully")
+          
             setState(obj);
         }
     }
@@ -78,17 +78,17 @@ const UserLog = () => {
          progress: undefined,
         })
       }
-      const success = (msg) => {
-        toast.success(msg,{
-         position: "top-right",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-        })
-      }
+    //   const success = (msg) => {
+    //     toast.success(msg,{
+    //      position: "top-right",
+    //      autoClose: 5000,
+    //      hideProgressBar: false,
+    //      closeOnClick: true,
+    //      pauseOnHover: true,
+    //      draggable: true,
+    //      progress: undefined,
+    //     })
+    //   }
    
     return (
         <div className="container">

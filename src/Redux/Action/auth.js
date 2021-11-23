@@ -1,5 +1,8 @@
+import { url } from "./restapi";
+
 export const signInFetch = (state) => (dispatch) =>{
-    fetch('http://34.210.129.167/api/login', {
+    
+    fetch(`${url}/login`, {
         method: 'POST',
         body: JSON.stringify(state),
         headers: {
@@ -16,7 +19,8 @@ export const signInFetch = (state) => (dispatch) =>{
     .catch((err)=> console.log(err))
 }
     export const signUpFetch = (state,history) => (dispatch) =>{
-        fetch('http://34.210.129.167/api/register', {
+      
+       fetch(`${url}/register`, {
        method: 'POST',
        body: JSON.stringify(state),
        headers: {

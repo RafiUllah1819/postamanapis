@@ -1,6 +1,8 @@
+import { url } from "./restapi"
+
 export const getAllData = (token,page) => (dispatch) => {
 
-    fetch(`http://34.210.129.167/api/users?page=${page}`, {
+    fetch(`${url}/users?page=${page}`, {
         method: 'GET',
         headers: {
         'Content-type': 'application/json; charset=UTF-8',
@@ -13,7 +15,7 @@ export const getAllData = (token,page) => (dispatch) => {
 }
 export const getEditData = (token,push, state) => (dispatch) =>{
 
-    fetch(`http://34.210.129.167/api/users/${state.id}`, {
+    fetch(`${url}/users/${state.id}`, {
         method: 'PUT',
         body: JSON.stringify(state),
         headers: {
@@ -28,7 +30,7 @@ export const getEditData = (token,push, state) => (dispatch) =>{
 }
 export const deleteUser = (token,id) => (dispatch) =>{
 
-    fetch(`http://34.210.129.167/api/users/${id}`, {
+    fetch(`${url}/users/${id}`, {
         method: 'DELETE',
         headers: {
         'Content-type': 'application/json; charset=UTF-8',

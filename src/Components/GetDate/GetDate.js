@@ -26,8 +26,8 @@ const GetDate = () => {
             <div className={`preHOurs ${styles.preHours}`}>
                 <h5>Prefferd Hours</h5>
             <div className="form-group">
-               <input type ="text" className="form-control" 
-                placeholder="prefferd hour"
+               <input type ="text" className={`form-control ${styles.formControl}`} 
+                placeholder="Type prefferd hour..."
                 value={prefHours}
                 onChange={(e)=>setPrefHours(e.target.value)}
                 />
@@ -44,8 +44,8 @@ const GetDate = () => {
         <h5>Filter by Date</h5>
         <div className={styles.formData}>
         <div className="form-group mt-4 d-flex">
-        <label style={{color:"white", fontSize:"24px",paddingRight:'8px'}}>From:</label>
-               <input type ="date" className="form-control" 
+        <label style={{color:"white", fontSize:"20px",paddingRight:'8px'}}>From:</label>
+               <input type ="date" className={`form-control ${styles.formControl}`} 
                 name="begin"
                 placeholder="yyyy-mm-dd"
                 min="1997-01-01" max="2030-12-31"
@@ -53,8 +53,8 @@ const GetDate = () => {
                 />
             </div>
             <div className="form-group mt-3 d-flex">
-            <label style={{color:"white", fontSize:"24px",padding:'0 20px'}}>To:</label>
-                <input type ="date" className="form-control"
+            <label style={{color:"white", fontSize:"20px",padding:'0 20px'}}>To:</label>
+                <input type ="date" className={`form-control ${styles.formControl}`}
                  name="begin"
                  placeholder="yyyy-mm-dd"
                  min="1997-01-01" max="2030-12-31"

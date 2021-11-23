@@ -1,11 +1,11 @@
 .Fields{
     max-width: 340px;
     width: 100%;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     background: cadetblue;
     padding: 18px;
 }
-.btn{
+/* .btn{
     width: 114px;
     color: white;
     margin-top: 12px;
@@ -13,6 +13,9 @@
     align-items: center;
     margin-left: 76px;
     
+} */
+.btn{display: flex; margin-top: 5px;background: transparent;height: 33px;border: 1px solid #ced4da;color: #fff;font-size: 15px;
+margin-left: 65px;margin-top: 10px;border-radius: 4px;align-items: center;
 }
 .preHours{
     max-width: 340px;
@@ -25,9 +28,19 @@
 
 }
 h5{color: #fff;text-align: left;}
-.preHours button{display: flex; margin-top: 5px;}
+.preHours button{display: flex; margin-top: 5px;background: transparent;height: 33px;border: 1px solid #ced4da;color: #fff;font-size: 15px;}
 /* .searchSections{margin-left: 40px;} */
- 
+ .formControl{background: transparent;height: 40px;color: #fff;}
+ .formControl:focus{
+     background: transparent;
+     color: #fff;
+ }
+ .formControl::placeholder{color: #fff;opacity: .6;}
+input{color: #fff;}
+.searchSections{
+    margin-bottom: 20px;
+}
+
 @media(max-width:894px){
     .container{padding: 0 15px;}
     .Fields{
@@ -50,5 +63,6 @@ h5{color: #fff;text-align: left;}
         margin: 0 auto 20px;
         width: 90%;
         order: 2;
+        height: 214px;
      }
 }

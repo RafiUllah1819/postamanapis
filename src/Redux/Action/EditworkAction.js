@@ -1,7 +1,8 @@
+import { url } from './restapi'
 import { fetch_workLog } from './workLog'
 export const getEditLog = (token,push, state) => (dispatch) =>{
 
-    fetch(`http://34.210.129.167/api/work-logs/${state.id}`, {
+    fetch(`${url}/work-logs/${state.id}`, {
         method: 'PUT',
         body: JSON.stringify(state),
         headers: {

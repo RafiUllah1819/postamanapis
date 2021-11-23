@@ -7,7 +7,7 @@
     display: flex;
     width: 151px;
     height: 37px;
-    background: blue;
+    background: transparent;
     text-align: center;
     margin-left: auto;
     justify-content: center;
@@ -17,6 +17,8 @@
     height: 44px;
     margin-top: 18px;
     margin-right: 48px;
+    border: 1px solid rgb(4, 97, 4);
+    color: green;
 }
 h3{
     text-align: left;
@@ -64,16 +66,25 @@ h3{
 .Paginations .pageItem:first-child .pageLink{border-radius: 50%;}
 .Paginations .pageItem:last-child .pageLink{border-radius: 50%;}
 
+@media(max-width:1257px){
+    .Card ul li{width: 100%;} 
+}
 @media(max-width:768px){
     table{display: none;}
     .Card{width: 100%;}
-    .Card ul li{font-size: 20px;}
+    /* .Card ul li{font-size: 20px;} */
+    .Card ul{padding: 0;}
+    .Card ul li{font-size: 18px;width: 44%;}
+    .creatbtn a{margin-top: 0;margin-right: 15px;}
+    .tableData{
+        padding-top: 50px;
+    }
 }
 @media(max-width:600px){
     .Card ul{padding: 0;}
     .Card ul li{font-size: 18px;width: 44%;}
+    .creatbtn a{margin-bottom: 30px;}
 }
 @media(max-width:450px){
-
     .Card ul li{font-size: 18px;width: 87%;margin: 0 auto;}
 }

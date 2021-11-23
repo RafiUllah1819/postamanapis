@@ -1,8 +1,9 @@
 import * as CONSTANT from '../Constants/Constanst'
+import { url } from './restapi'
 
 export const createUser = (state, token) => (dispatch) =>{
      console.log("action state", state)
-    fetch('http://34.210.129.167/api/users', {
+    fetch(`${url}/users`, {
         method: 'POST',
         body: JSON.stringify(state),
         headers: {

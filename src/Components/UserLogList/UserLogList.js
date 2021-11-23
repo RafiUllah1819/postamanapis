@@ -33,51 +33,7 @@ import { deleteUserLog } from '../../Redux/Action/workLog';
         <div className="workloglist">
             <GetDate />
            <div className={styles.workLog}>
-           {/* <table className="table table-striped  table-hover mb-2">
-               <thead>
-                   <tr>
-                       <th>Id</th>
-                       <th>Log_Date</th>
-                       <th>Hours</th>
-                       <th>UserType</th>
-                       <th>Description</th>
-                       <th>Edit</th>
-                       <th>Delete</th>
-                   </tr>
-               </thead>
-               <tbody>
-                 {
-                     workData?.map((work , i)=>{
-                         return(
-                            <tr key={i} style={{backgroundColor:work.is_under_hours?'#FFCCCB':'#aedb9f'}}>
-                                <td>{work.id}</td>
-                                <td>{work?.log_date}</td>
-                                <td>{work.hours}</td>
-                                <td>{role}</td>
-                                <td>{work.description}</td>
           
-                                   <td><Link to='/editLog'
-  
-                            onClick={()=>dispatch(edit_work(work))}
-                            >
-                            <i className="fa fa-edit" style={{color:"#000"}}></i>
-                                </Link></td>
-                            
-                                <td>
-                                
-                                  <i onClick={()=>
-                                    dispatch(deleteUserLog(token,work.id))
-                                } className="fa fa-trash" style={{color:"red",fontSize:'20px',cursor:"pointer"}}></i>
-                               
-                            </td>
-
-                            </tr>
-                            
-                         )
-                        })
-                    }
-               </tbody>
-              </table> */}
           <div className={styles.cardSection}>
           {
              workData?.map((work, i)=>{

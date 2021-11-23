@@ -38,6 +38,9 @@
     margin-right: 20px;
     text-align: left;
 }
+.Card ul li:last-child{
+    text-align: right       ;
+}
 .Card li span{
     margin-left: 5px;
     color: #808080;
@@ -46,6 +49,15 @@
     margin-left: 5px;
     width: 73px;
     height: 37px;
+}
+.userbtn{background: transparent;
+color: #fff;
+border: 1px solid #fff;
+border-radius: 5px;
+display: flex;
+align-items: center;
+width: 120px;
+height: 45px;
 }
 .Paginations {justify-content: center;}
 .Paginations li {width: 40px;height: 40px;margin-right: 10px;}
@@ -58,11 +70,12 @@
         width: 47%;
         margin: 0 10px 15px;
         padding: 20px 10px;
-
     } 
+    .Card ul{padding-left: 0;} 
+    .Card ul li{padding-left: 0;width: 48%; padding: 20px 0;font-size: 16px;margin-right: 4px;} 
 }
 @media(max-width:896px){
-   
+   .userbtn{margin-left: 44px;}
     .Card{width: 90%;margin: 0 auto 20px;}
 }
 @media(max-width:600px){

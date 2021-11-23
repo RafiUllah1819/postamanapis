@@ -1,7 +1,8 @@
 import { fetch_workLog } from "./workLog"
+import { url } from "./restapi"
 export const getDate = (token) => (dispatch) =>{
 
-    fetch('http://34.210.129.167/api/users', {
+    fetch(`${url}/users`, {
         method: 'GET',
         headers: {
         'Content-type': 'application/json; charset=UTF-8',
@@ -21,7 +22,7 @@ export const getDate = (token) => (dispatch) =>{
 export const getHours = (preHours) => (dispatch) =>{
     const id = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
-    fetch(`http://34.210.129.167/api/users/${id}/preferred-working-hours`, {
+    fetch(`${url}/users/${id}/preferred-working-hours`, {
         method: 'PATCH',
         body:JSON.stringify(preHours),
         headers: {
