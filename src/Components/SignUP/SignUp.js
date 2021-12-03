@@ -1,12 +1,15 @@
 import React ,{useState} from 'react'
 import styles from './SignUp.module.css';
 import { signUpFetch } from '../../Redux/Action/auth';
-import {  useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import {  useDispatch,useSelector } from 'react-redux';
+import { Link  } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const SignUp = () => {
     const  dispatch = useDispatch()
+    const code = useSelector((state)=>state.AuthReducer.code)
+    console.log("code of signupF DFDF" , code)
+
         const obj = {
             firstName : '',
             lastName : '',
@@ -24,13 +27,17 @@ const SignUp = () => {
             if(state.firstName.length===0) error("FirstName is empty")
             if(state.lastName.length===0) error("LastName is empty")
             if(state.email.length===0) error("Email is empty")
+            if(code) error("Invalid email")
             if(state.password.length===0) error("Password is empty")
-            if(state.password_confirmation.length===0) error("confirm Password is empty")
+            if(state.password.length<8) error("Password must be 8 charactors")
+            if(state.password_confirmation.length===0) error("confirm Password is empty") 
+            if(state.password_confirmation.length<8) error("Confrim_Password must be 8 charactors")
             if(password !== password_confirmation) error("password don't match")
 
             else if(state.firstName.length < 1 && state.lastName.length<1 && state.email.length<1 && state.password.length<1 && state.password_confirmation.length<1)
             {setAuth(true)}
             else{
+                // history.push("/SignIn")
                 dispatch(signUpFetch(state))
                 setState(obj);
                 // success("User Sign Up successfully")
@@ -69,6 +76,13 @@ const SignUp = () => {
             })
         }
 
+        const  handleKeyUP = (event) => {
+             if(event.key === 'Enter')
+             { 
+                 handleSubmit()
+           }
+         }
+
         const error = (msg) => {
         toast.error(msg,{
          position: "top-right",
@@ -93,18 +107,18 @@ const SignUp = () => {
                     className={`form-control ${styles.inputField}`}
                     placeholder="FirstName"
                     value ={state.firstName}
-                    onChange = {handleChangeFirst}
-                    
+                    onChange = {handleChangeFirst} 
+            
                   />
      
-    
                   </div>
-                <div className="form-group mb-3">
+                    <div className="form-group mb-3">
                     <input type="text"
                     className={`form-control ${styles.inputField}`}
                     placeholder="LastName"
                     value ={state.lastName}
                     onChange = {handleChangeLast}
+                 
                   />
                
                   </div>
@@ -114,6 +128,7 @@ const SignUp = () => {
                     placeholder="Email"
                     value = {state.email}
                     onChange = {handleChangeEmail}
+                 
                   />
                   
                   </div>
@@ -123,6 +138,7 @@ const SignUp = () => {
                     placeholder="Password"
                     value = {state.password}
                     onChange = {handleChangePassword }
+               
                   />
                  
                   </div>
@@ -132,6 +148,7 @@ const SignUp = () => {
                     placeholder="confirm_Password"
                     value = {state.password_confirmation}
                     onChange = {handleChangeCpassword}
+                    onKeyPress={handleKeyUP} 
                   />
                   
                   </div>

@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import { url } from "./restapi"
-let code;
+let usercode;
 const error = (msg) => {
     toast.error(msg,{
      position: "top-right",
@@ -24,7 +24,7 @@ const error = (msg) => {
     })
   }
 
-export const createWorkLog = (state,token) => (dispatch) =>{
+export const createWorkLog = (state,token,push) => (dispatch) =>{
     // console.log("action token", token, JSON.stringify(state))
    fetch(`${url}/work-logs`, {
        method: 'POST',
@@ -35,24 +35,24 @@ export const createWorkLog = (state,token) => (dispatch) =>{
    }, 
    })
    .then((json)=>{
-       code = json.status
+       usercode = json.status
+       localStorage.setItem('usercode',usercode)
        json.json()
    } 
    )
    .then((response) =>{ 
-    if(code!==422 && code!==400){
+    if(usercode!==422 && usercode!==400){
         dispatch(fetch_workLog(token,1));
+        // push('/UserLogList')
         success("workLog added successfully")
-    }else{
-        error("Error in workLog & not added")
-    }
+    }else if(usercode===422) error("WorkLog can't add before current day")
+          if(usercode===400) error("Can't add work on same date")
+    
 })
    .catch((err)=>console.log(err))
 }
 export const fetch_workLog = (token,page) => (dispatch) =>{
     // console.log("token worklog",token);
-    // console.log("token worklog",page);
-    // console.log("inside Fetch");
    fetch(`${url}/work-logs?page=${page}`, {
        method: 'GET',
        headers: {
@@ -62,13 +62,11 @@ export const fetch_workLog = (token,page) => (dispatch) =>{
    })
    .then((json)=> json.json())
    .then((response) => dispatch(set_workLog(response.workLogs)))
-//    .then((response) => console.log("check get worklog last_page",response))
    .catch((err)=>console.log(err))
 }
 export const filterWorkLog = (from,to) => (dispatch) =>{
     const token = localStorage.getItem('token')
     // console.log("token worklog",token);
-    // console.log("inside Fetch");
    fetch(`${url}/work-logs/${from}/${to}`, {
        method: 'GET',
        headers: {
@@ -78,7 +76,6 @@ export const filterWorkLog = (from,to) => (dispatch) =>{
    })
    .then((json)=> json.json())
    .then((response) => dispatch(set_workLog(response.workLogs,response.pages)))
-//    .then((response) => console.log("check get worklogresponse" , response))
    .catch((err)=>console.log(err))
 }
 export const deleteUserLog = (token,id) => (dispatch) =>{

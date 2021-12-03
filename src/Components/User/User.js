@@ -10,6 +10,8 @@ const User = () => {
     const dispatch = useDispatch()
     const token = useSelector((state)=>state.AuthReducer.token)
     const role = useSelector((state)=>state.AuthReducer.role)
+    // const code = localStorage.getItem('code')
+    // console.log("user code", code)
 
     const obj = {
     firstName : '',
@@ -25,24 +27,30 @@ const User = () => {
     const [auth, setAuth] = useState(false)
 
     const handleSubmit = () =>{
-        const {password, password_confirmation} = state;
+        const {password, password_confirmation} = state; 
+        if(state.firstName.length===0) error("Firstname is empty")
+        if(state.lastName.length===0) error("LastName is empty")
+        if(state.email.length===0) error("Email is empty")
+        if(state.password.length===0) error("Password is empty")
+        if(state.password_confirmation.length===0) error("confirm password is empty")
+        if(state.password.length<8) error("Password length must be 8 characters")
+        if(state.password_confirmation.length<8) error("confirm password length must be 8 characters")
         if(password !== password_confirmation) error("Password don't match")
         else if(state.firstName.length<1 && state.lastName.length<1 && state.email.length<1 && state.password.length<1 && state.password_confirmation.length<1 && password !== password_confirmation)
-         {
-            if(state.firstName.length===0) error("Firstname is empty")
-            if(state.lastName.length===0) error("LastName is empty")
-            if(state.email.length===0) error("Email is empty")
-            if(state.password.length===0) error("Password is empty")
-            if(state.password_confirmation.length===0) error("confirm password is empty")
-            setAuth(true)
-        }
+       {setAuth(true)}
         else{
             dispatch(createUser(state,token))
-            success("Record added successfully")
+            // success("Record added successfullysss")
             setState(obj)
         }
-        // history.push('/users')
     }
+
+    const  handleKeyUP = (event) => {
+         if(event.key === 'Enter')
+         { 
+             handleSubmit()
+       }
+     }
 
   const handleChangeFirst = (e) =>{
     setState({
@@ -94,18 +102,7 @@ const User = () => {
          progress: undefined,
         })
       }
-      const success = (msg) => {
-        toast.success(msg,{
-         position: "top-right",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-        })
-      }
-
+   
     return (
       <div className="container">
       <div>
@@ -117,6 +114,7 @@ const User = () => {
                 placeholder="FirstName"
                 value ={state.firstName}
                 onChange = {handleChangeFirst}
+              
               />
               
               </div>
@@ -126,6 +124,7 @@ const User = () => {
                 placeholder="LastName"
                 value ={state.lastName}
                 onChange = {handleChangeLast}
+              
               />
               
               </div>
@@ -135,6 +134,7 @@ const User = () => {
                 placeholder="Email"
                 value = {state.email}
                 onChange = {handleChangeEmail}
+            
               />
               
               </div>
@@ -144,6 +144,7 @@ const User = () => {
                 placeholder="Password"
                 value = {state.password}
                 onChange = {handleChangePassword }
+              
               />
              
               </div>
@@ -153,6 +154,7 @@ const User = () => {
                 placeholder="confirm_Password"
                 value = {state.password_confirmation}
                 onChange = {handleChangeCpassword}
+                onKeyPress={ handleKeyUP}
               />
              
               </div>
@@ -160,6 +162,7 @@ const User = () => {
             <div className="form-group">
                 <select 
                 onClick = {handleChangeUserType}
+                onKeyPress={ handleKeyUP}
                     className={`form-control ${styles.inputField}`} id="exampleFormControlSelect2">
                 { role === "admin" &&
                  <option>manager</option>   

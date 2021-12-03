@@ -5,11 +5,14 @@ import { fetch_workLog } from '../../Redux/Action/workLog';
 import { createWorkLog } from '../../Redux/Action/workLog';
 import { Link} from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 
 const UserLog = () => {
     const dispatch = useDispatch();
+    const history = useHistory()
     const token = useSelector((state)=>state.AuthReducer.token)
+    const usercode = localStorage.getItem('usercode')
 
     const obj = {
         logDate : '',
@@ -22,7 +25,7 @@ const UserLog = () => {
 
 
     useEffect(() => {
-        dispatch(fetch_workLog(token))
+        dispatch(fetch_workLog(token, obj,setState))
         // eslint-disable-next-line
     }, [token]);
 
@@ -35,17 +38,15 @@ const UserLog = () => {
     //     }
     const handleSubmit = () =>{
     
-        if(state.logDate.length < 1 || state.hours.length<1 || state.description.length<1)
-        {setAuth(true)
-         if(state.logDate.length===0)  error("LogDate is empty")
-         if(state.hours.length===0)  error("Hours is empty")
-         if(state.description.length===0)  error("Description is empty")
-        }
+        if(state.logDate.length===0)  error("LogDate is empty")
+        if(state.hours.length===0)  error("Hours is empty")
+        if(state.description.length===0)  error("Description is empty")
+        if(state.logDate.length < 1 && state.hours.length<1 && state.description.length<1)
+            {setAuth(true)}
         
-        else{
-            dispatch(createWorkLog(state,token))
-          
-            setState(obj);
+        else {
+            dispatch(createWorkLog(state,token,obj))
+            // setState(obj);
         }
     }
     const hangleChangelogData = (e) =>{
@@ -66,6 +67,7 @@ const UserLog = () => {
             description : e.target.value
         })
     }
+  
   
       const error = (msg) => {
         toast.error(msg,{
@@ -89,6 +91,13 @@ const UserLog = () => {
     //      progress: undefined,
     //     })
     //   }
+
+    const  handleKeyUP = (event) => {
+         if(event.key === 'Enter')
+         { 
+             handleSubmit()
+       }
+     }
    
     return (
         <div className="container">
@@ -102,6 +111,7 @@ const UserLog = () => {
                 name="begin"
                 placeholder="yyyy-mm-dd"
                 min="1997-01-01" max="2030-12-31"
+               
               />  
                {/* {auth && state.logDate === '' ? <span style={{color:'red'}}>please enter lastName </span>: null} */}
               </div>
@@ -111,6 +121,7 @@ const UserLog = () => {
                 placeholder="Enter hours"
                 onChange={hangleChangehours}
                 value={state.hours}
+             
               />
                {/* {auth && state.hours === '' ? <span style={{color:'red'}}>please enter lastName </span>: null} */}
               </div>
@@ -120,6 +131,7 @@ const UserLog = () => {
                  id="exampleFormControlTextarea1" rows="4" 
                  value={state.description}
                  onChange={hangleChangeDescription }
+                 onKeyPress={handleKeyUP}
                  />
                   {/* {auth && state.description === '' ? <span style={{color:'red'}}>please enter lastName </span>: null} */}
             </div>

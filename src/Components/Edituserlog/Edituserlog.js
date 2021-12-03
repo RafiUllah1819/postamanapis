@@ -46,7 +46,7 @@ const EditUserLog = () => {
                 value={hours}
               />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <textarea  className={`form-control ${styles.inputField}`} 
                 placeholder="Description"
                  id="exampleFormControlTextarea1" rows="4" 
@@ -60,7 +60,8 @@ const EditUserLog = () => {
                 const date = logDate.split('/');
                 const formatDate = `${date[0]}`
                 dispatch(getEditLog(token,history.push,{id, logDate:formatDate,hours, description}));
-                history.push('/UserLogList')}
+                // history.push('/UserLogList')
+            }
             }
             >
                    Update

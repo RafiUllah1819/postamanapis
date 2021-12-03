@@ -25,8 +25,17 @@ const SignIn = () => {
         else{
             dispatch(signInFetch(state))
             // success("User login successfully")
-            setState(obj);
+            // setState(obj);
+            
         }
+    }
+
+   const  handleKeyUP = (event) => {
+
+        if(event.key === 'Enter')
+        { 
+            handleSubmit()
+      }
     }
 
     const handleChangeEmail = (e) =>{
@@ -68,6 +77,7 @@ const SignIn = () => {
                   placeholder="Email"
                   value = {state.email}
                   onChange = {handleChangeEmail}
+        
                 />
                  {auth && state.email === '' ? <span style={{color:'red'}}>please enter email </span>: null}
                 </div>
@@ -77,6 +87,7 @@ const SignIn = () => {
                   placeholder="Password"
                   value = {state.password}
                   onChange = {handleChangePassword }
+                onKeyPress={handleKeyUP}
                 />
                 {auth && state.password === '' ? <span style={{color:'red'}}>please enter password </span>: null}
                 </div>
@@ -84,7 +95,8 @@ const SignIn = () => {
                   <div className={styles.btns}>
     
                       <button className="btn btn-success d-flex"
-                      onClick={handleSubmit}>
+                      onClick={handleSubmit}
+                      >
                         SignIn
                         </button>
                        <p> If don't have account
@@ -99,4 +111,6 @@ const SignIn = () => {
     )
 }
 
+
 export default SignIn
+
